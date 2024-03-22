@@ -1,14 +1,15 @@
 // import React from 'react';
 
-
-const TodoListItem = ({ todo }) => {
+const TodoListItem = ({ todo, onRemoveTodo }) => {
+    const handleRemoveClick = () => {
+        onRemoveTodo(todo.id);
+    };
     return (
         <div>
-            <li >{todo.title}</li>
-            {/* <p>This is multi line return:</p>
-            <p> Line 1</p>
-            <p> Line 2</p>
-            <p> Line 3</p> */}
+            <li >{todo.title}
+                <button type="button" onClick={handleRemoveClick}> Remove</button>
+            </li>
+
         </div >
     );
 }
