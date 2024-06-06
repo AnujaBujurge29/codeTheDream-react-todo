@@ -1,0 +1,55 @@
+.ListItem {
+  color: blue;
+}
+body {
+  /* Change the background color of the page body */
+  background-color: lightgray;
+  /* Change the default text color */
+  color: #333;
+  /* Customize the font family */
+  font-family: "Arial", sans-serif;
+}
+/* Customize style of navigation items */
+.nav-item {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+/* Add spacing (padding/margin) between elements */
+div {
+  align-self: start;
+}
+li {
+  margin-bottom: 10px;
+}
+
+/* Change the font size, weight, and color of all headings */
+h1,
+h2,
+h3,
+span {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+}
+/* Customize input and button styles */
+input,
+button {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: purple;
+}
+/* Use Media Queries to make sure the application is responsive for all device sizes (mobile, tablet, desktop, etc.) */
+@media screen and (max-width: 768px) {
+  /* Adjust styles for smaller devices */
+  h1,
+  h2,
+  h3 {
+    font-size: 20px;
+  }
+
+  input[type="text"],
+  button {
+    width: 100%;
+  }
+}

@@ -1,10 +1,12 @@
+
+import style from './TodoListItem.module.css'
 const TodoListItem = ({ todo, onRemoveTodo }) => {
     const handleRemoveClick = () => {
         onRemoveTodo(todo.id);
     };
     return (
         <div>
-            <li >{todo.title}&nbsp;&nbsp;&nbsp;&nbsp;
+            <li className={style.ListItem} >{todo.title}&nbsp;&nbsp;&nbsp;&nbsp;
                 <button type="button" onClick={handleRemoveClick}>Remove</button>
             </li>
 
