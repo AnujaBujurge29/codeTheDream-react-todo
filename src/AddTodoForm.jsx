@@ -1,5 +1,3 @@
-// import React from 'react';
-
 import { useState } from "react";
 import InputWithLabel from "./InputWithLabel";
 
@@ -28,7 +26,7 @@ const AddTodoForm = ({ onAddTodo }) => {
                 value={todoTitle}
                 onInputChange={handleTitleChange}
                 label="Title"
-            >New Title:&nbsp;&nbsp;&nbsp;
+            ><span>New Title:</span>&nbsp;&nbsp;&nbsp;
             </InputWithLabel>
             <button type="submit" className="btn btn-primary mt-3">
                 Add Todo
