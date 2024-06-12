@@ -1,12 +1,9 @@
 .ListItem {
-  color: blue;
+  color: #00008b;
 }
 body {
-  /* Change the background color of the page body */
   background-color: lightgray;
-  /* Change the default text color */
-  color: #333;
-  /* Customize the font family */
+  color: #00007b;
   font-family: "Arial", sans-serif;
 }
 /* Customize style of navigation items */
@@ -29,15 +26,15 @@ h3,
 span {
   font-size: 24px;
   font-weight: bold;
-  color: #007bff;
 }
 /* Customize input and button styles */
 input,
 button {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background: purple;
+  padding: 10px;
+  font-size: 1em;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #2f4f4f;
 }
 /* Use Media Queries to make sure the application is responsive for all device sizes (mobile, tablet, desktop, etc.) */
 @media screen and (max-width: 768px) {
@@ -50,6 +47,7 @@ button {
 
   input[type="text"],
   button {
+    color: white;
     width: 100%;
   }
 }

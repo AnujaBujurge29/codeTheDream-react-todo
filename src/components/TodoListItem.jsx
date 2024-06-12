@@ -1,5 +1,6 @@
-
 import style from './TodoListItem.module.css'
+import PropTypes from "prop-types";
+
 const TodoListItem = ({ todo, onRemoveTodo }) => {
     const handleRemoveClick = () => {
         onRemoveTodo(todo.id);
@@ -13,4 +14,11 @@ const TodoListItem = ({ todo, onRemoveTodo }) => {
         </div >
     );
 }
+TodoListItem.propTypes = {
+    todo: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+    }).isRequired,
+    onRemoveTodo: PropTypes.func.isRequired,
+};
 export default TodoListItem;
