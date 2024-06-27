@@ -8,10 +8,11 @@ function App() {
 
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isAscending, setIsAscending] = useState(true);
 
   useEffect(() => {
-    fetchData()
-  }, []);
+    fetchData();
+  }, [isAscending]);
 
   const fetchData = async () => {
     const options = {
@@ -20,7 +21,7 @@ function App() {
         Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`,
       }
     }
-    const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}`
+    const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}?view=Grid%20view`
 
     try {
       const response = await fetch(url, options)
@@ -29,13 +30,32 @@ function App() {
         throw new Error(`Error: ${response.status} `)
       }
       const data = await response.json()
+
       console.log(data);
+
+      // const todos = data.records.map(record => ({
+      //   title: record.fields.title,
+      //   id: record.id
+      // }));
+      data.records.sort((objectA, objectB) => {
+        const titleA = objectA.fields.title.toUpperCase();
+        const titleB = objectB.fields.title.toUpperCase();
+        if (titleA < titleB) {
+          return isAscending ? -1 : 1;
+        }
+        if (titleA > titleB) {
+          return isAscending ? 1 : -1;
+        }
+        return 0;
+      });
+
       const todos = data.records.map(record => ({
         title: record.fields.title,
         id: record.id
       }));
 
       console.log(todos); // Todos array
+
       setTodoList(todos);
       setIsLoading(false);
 
@@ -51,11 +71,28 @@ function App() {
   }, [todoList, isLoading]);
 
   const addTodo = (newTodo) => {
-    setTodoList([...todoList, newTodo]);
+    setTodoList(prevTodoList => {
+      const updatedTodoList = [...prevTodoList, newTodo];
+      return updatedTodoList.sort((objectA, objectB) => {
+        const titleA = objectA.title.toUpperCase();
+        const titleB = objectB.title.toUpperCase();
+        if (titleA < titleB) {
+          return isAscending ? -1 : 1;
+        }
+        if (titleA > titleB) {
+          return isAscending ? 1 : -1;
+        }
+        return 0;
+      });
+    });
   };
 
   const removeTodo = (id) => {
     setTodoList(todoList.filter((todo) => todo.id !== id));
+  };
+
+  const toggleSortOrder = () => {
+    setIsAscending(!isAscending);
   };
 
   return (
@@ -64,6 +101,9 @@ function App() {
         <Route path="/" element={
           <Fragment>
             <h1>Todo List</h1>
+            <button onClick={toggleSortOrder}>
+              Toggle Sort Order
+            </button>
             <AddTodoForm onAddTodo={addTodo} />
             <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
           </Fragment>
