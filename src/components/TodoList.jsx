@@ -1,10 +1,11 @@
 import TodoListItem from "./TodoListItem";
 import PropTypes from "prop-types";
+import "../App.css"
 
 const TodoList = ({ todoList, onRemoveTodo }) => {
     return (
         <div>
-            <ul>
+            <ul className="box content">
                 {todoList.map((todo) => {
                     return <TodoListItem key={todo.id} todo={todo} onRemoveTodo={onRemoveTodo} />
                 })}

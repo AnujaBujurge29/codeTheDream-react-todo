@@ -99,13 +99,13 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={
-          <Fragment>
-            <h1>Todo List</h1>
-            <button onClick={toggleSortOrder}>
-              Toggle Sort Order
-            </button>
+          <Fragment className="wrapper">
+            <h1 className="box header">Todo List</h1>
             <AddTodoForm onAddTodo={addTodo} />
             <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+            <button onClick={toggleSortOrder} className="box footer">
+              Toggle Sort Order
+            </button>
           </Fragment>
         }>
         </Route>
