@@ -2,6 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import "../App.css"
 import InputWithLabel from "./InputWithLabel";
+import { Link } from "react-router-dom"
 
 const AddTodoForm = ({ onAddTodo }) => {
     const [todoTitle, setTodoTitle] = useState('')
@@ -22,7 +23,7 @@ const AddTodoForm = ({ onAddTodo }) => {
         setTodoTitle('')
     }
     return (
-        <form onSubmit={hanldeAddTodo}>
+        <form onSubmit={hanldeAddTodo}><br />
             <InputWithLabel
                 className="box content"
                 id="todo-title"
@@ -33,7 +34,8 @@ const AddTodoForm = ({ onAddTodo }) => {
             </InputWithLabel>
             <button type="submit" className="btn btn-primary mt-3 box sidebar">
                 Add Todo
-            </button>
+            </button><br /><br />
+            <Link to="/todos" ><button className="box footer">Todo List</button></Link>&nbsp;&nbsp;
         </form>
     );
 }

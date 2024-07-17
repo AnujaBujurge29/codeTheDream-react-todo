@@ -1,8 +1,10 @@
 import { Fragment, useEffect, useState } from "react"
-import AddTodoForm from "./components/AddTodoForm"
 import "./App.css"
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
+import LandingPage from "./components/LandingPage"
+import AddTodoForm from "./components/AddTodoForm"
 import TodoList from "./components/TodoList"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+// import Loading from "./components/Loading"
 
 function App() {
 
@@ -58,7 +60,6 @@ function App() {
         }
         return 0;
       });
-
 
       sortTodoList(todos, isAscending);
       setTodoList(todos);
@@ -143,21 +144,33 @@ function App() {
     setIsAscending(!isAscending);
   };
 
+  const Loading = () => (
+    <div className="loading">
+      <h2>Loading...</h2>
+    </div>
+  );
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={
-          <Fragment className="wrapper">
-            <h1 className="box header">Todo List</h1>
-            <AddTodoForm onAddTodo={addTodo} />
-            <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
-            <button onClick={toggleSortOrder} className="box footer">
-              Toggle Sort Order
-            </button>
-          </Fragment>
+        <Route path="/" element={<LandingPage />}></Route>
+        <Route path="/todos" element={
+          isLoading ? (
+            <Loading />
+          ) : (
+            <Fragment className="wrapper">
+              <h1 className="box header">Todo List</h1>
+              { }
+              <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+              <button onClick={toggleSortOrder} className="box footer">
+                Toggle Sort Order
+              </button><br /><br />
+              <Link to="/" ><button className="box footer">Home Page</button></Link>&nbsp;&nbsp;
+              <Link to="/new" ><button className="box footer">Add new Todo</button></Link>
+            </Fragment>)
         }>
         </Route>
-        <Route path="/new" element={<h2>New Todo List</h2>} />
+        <Route path="/new" element={<AddTodoForm onAddTodo={addTodo} />} />
       </Routes>
     </BrowserRouter >
   )
